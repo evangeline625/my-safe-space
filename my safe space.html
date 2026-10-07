@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my safe space • Pink Goth Sanctuary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Fredoka:wght@300;400;500;600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        goth: {
+                            base: '#120d18',
+                            dark: '#1c1328',
+                            card: '#281938',
+                            border: '#4a2b63',
+                        },
+                        pinkgoth: {
+                            deep: '#831843',
+                            accent: '#f472b6',
+                            bright: '#ff69b4',
+                            glow: '#ff80bf',
+                            light: '#fbcfe8',
+                            pastel: '#fce7f3'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        cute: ['Fredoka', 'sans-serif'],
+                        sans: ['Quicksand', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'glow-pulse': 'glowPulse 2s ease-in-out infinite',
+                        'bubble': 'bubbleUp 1.8s ease-in infinite',
+                        'steam': 'steam 3s linear infinite',
+                        'twinkle': 'twinkle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glowPulse: {
+                            '0%, 100%': { filter: 'drop-shadow(0 0 8px rgba(255, 105, 180, 0.6))' },
+                            '50%': { filter: 'drop-shadow(0 0 18px rgba(255, 128, 191, 0.95))' },
+                        },
+                        bubbleUp: {
+                            '0%': { transform: 'translateY(0) scale(0.5)', opacity: '0.9' },
+                            '100%': { transform: 'translateY(-60px) scale(1.2)', opacity: '0' },
+                        },
+                        steam: {
+                            '0%': { transform: 'translateY(0) scale(1)', opacity: '0.6' },
+                            '50%': { transform: 'translateY(-15px) scale(1.15)', opacity: '0.3' },
+                            '100%': { transform: 'translateY(-30px) scale(1.3)', opacity: '0' }
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: '0.3', transform: 'scale(0.8)' },
+                            '50%': { opacity: '1', transform: 'scale(1.2)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar for goth pink theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #120d18;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a2b63;
+            border-radius: 9999px;
+            border: 2px solid #1c1328;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff69b4;
+        }
+
+        .goth-glass {
+            background: rgba(28, 19, 40, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(244, 114, 182, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 15px rgba(244, 114, 182, 0.15);
+        }
+
+        .goth-btn {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .goth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+        .goth-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Custom tab styles */
+        .tab-active {
+            background: linear-gradient(135deg, #831843 0%, #4a2b63 100%);
+            border-color: #ff69b4;
+            color: #fbcfe8;
+            box-shadow: 0 0 12px rgba(255, 105, 180, 0.4);
+        }
+
+        /* Fog Window Canvas */
+        #window-canvas {
+            touch-action: none;
+            cursor: pointer;
+        }
+
+        /* Sparkle cursor overlay */
+        .magic-sparkle {
+            position: absolute;
+            pointer-events: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff80bf;
+            box-shadow: 0 0 8px #ff69b4, 0 0 12px #fff;
+            animation: fadeOut 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1) rotate(0deg); }
+            100% { opacity: 0; transform: scale(0.2) rotate(180deg); }
+        }
+
+        /* Ember dissolution animation for cast away worry */
+        .ember-particle {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: #ff69b4;
+            box-shadow: 0 0 10px #ff80bf;
+            animation: riseAndFade 1.2s ease-out forwards;
+        }
+
+        @keyframes riseAndFade {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.2); }
+        }
+
+        /* Tarot Card Flip Effect */
+        .tarot-card-inner {
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        .tarot-card.flipped .tarot-card-inner {
+            transform: rotateY(180deg);
+        }
+        .tarot-front, .tarot-back {
+            backface-visibility: hidden;
+        }
+        .tarot-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-goth-base text-pinkgoth-pastel font-sans min-h-screen flex flex-col justify-between overflow-x-hidden select-none relative">
+
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-60">
+        <div class="absolute top-10 left-10 text-pinkgoth-accent opacity-30 animate-twinkle"><i class="fa-solid fa-moon text-4xl"></i></div>
+        <div class="absolute top-1/4 right-20 text-pinkgoth-bright opacity-20 animate-twinkle" style="animation-delay: 0.7s;"><i class="fa-solid fa-wand-magic-sparkles text-3xl"></i></div>
+        <div class="absolute bottom-20 left-1/3 text-pinkgoth-light opacity-20 animate-twinkle" style="animation-delay: 1.4s;"><i class="fa-solid fa-star text-2xl"></i></div>
+        <div class="absolute top-1/3 left-1/4 text-pinkgoth-glow opacity-15 animate-twinkle" style="animation-delay: 1.1s;"><i class="fa-solid fa-sparkles text-xl"></i></div>
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-pinkgoth-deep rounded-full blur-[120px] opacity-30"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-900 rounded-full blur-[140px] opacity-40"></div>
+    </div>
+
+    <header class="relative z-20 pt-4 pb-2 px-4 border-b border-pinkgoth-accent/20 goth-glass sticky top-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <div class="w-10 h-10 rounded-full bg-pinkgoth-deep border-2 border-pinkgoth-accent flex items-center justify-center text-pinkgoth-bright shadow-[0_0_12px_rgba(255,105,180,0.5)]">
+                        <i class="fa-solid fa-hat-wizard text-xl"></i>
+                    </div>
+                    <span class="absolute -bottom-1 -right-1 w-3 h-3 bg-pinkgoth-bright rounded-full animate-ping"></span>
+                </div>
+                <div>
+                    <h1 class="font-cinzel text-2xl font-bold tracking-wider text-pinkgoth-light flex items-center gap-2 drop-shadow-[0_0_10px_rgba(255,105,180,0.6)]">
+                        my safe space <span class="text-xs font-cute bg-pinkgoth-deep/80 text-pinkgoth-bright border border-pinkgoth-accent px-2 py-0.5 rounded-full uppercase tracking-normal">Pink Goth</span>
+                    </h1>
+                    <p class="text-xs text-pink-300/70 font-cute">Your enchanted witchy sanctuary 🔮✨</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="flex items-center gap-1 sm:gap-2 bg-goth-dark/80 p-1.5 rounded-full border border-pinkgoth-border/50 overflow-x-auto max-w-full">
+                <button onclick="switchTab('sanctuary')" id="tab-sanctuary" class="tab-btn tab-active px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-cute font-medium flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-house-chimney-window text-pinkgoth-bright"></i>
+                    <span>Room</span>
+                </button>
+                <button onclick="switchTab('avatar')" id="tab-avatar" class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-cute font-medium text-pinkgoth-light/70 hover:text-pinkgoth-light flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-user-ninja text-pink-400"></i>
+                    <span>Doll Maker</span>
+                </button>
+                <button onclick="switchTab('cauldron')" id="tab-cauldron" class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-cute font-medium text-pinkgoth-light/70 hover:text-pinkgoth-light flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-flask text-purple-400"></i>
+                    <span>Brew Potion</span>
+                </button>
+                <button onclick="switchTab('tarot')" id="tab-tarot" class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-cute font-medium text-pinkgoth-light/70 hover:text-pinkgoth-light flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-eye text-pinkgoth-accent"></i>
+                    <span>Oracle Card</span>
+                </button>
+                <button onclick="switchTab('journal')" id="tab-journal" class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-cute font-medium text-pinkgoth-light/70 hover:text-pinkgoth-light flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-book-bookmark text-pink-300"></i>
+                    <span>Spellbook</span>
+                </button>
+            </nav>
+
+            <!-- Quick Ambient Audio Bar -->
+            <div class="flex items-center gap-2 bg-goth-card/80 border border-pinkgoth-border/60 px-3 py-1.5 rounded-full">
+                <button onclick="toggleGlobalAudio()" id="global-audio-btn" class="text-pinkgoth-bright hover:scale-110 transition-transform p-1" title="Toggle All Ambience">
+                    <i class="fa-solid fa-volume-xmark text-lg" id="global-audio-icon"></i>
+                </button>
+                <span class="text-xs font-cute text-pinkgoth-light/80 hidden sm:inline">Cozy Sounds</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 flex flex-col justify-center">
+
+        <!-- ================= SECTION 1: SANCTUARY ROOM VIEW ================= -->
+        <section id="sec-sanctuary" class="tab-content block space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Left Column: Rainy Window & Candle Mood -->
+                <div class="goth-glass rounded-3xl p-5 flex flex-col justify-between space-y-4 border border-pinkgoth-accent/30 relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-cinzel text-lg text-pinkgoth-light font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-showers-heavy text-pinkgoth-accent"></i> Misty Window
+                        </h2>
+                        <span class="text-xs text-pink-300/60 font-cute bg-goth-base/60 px-2 py-1 rounded-md border border-pinkgoth-border/40">Drag to wipe fog ✨</span>
+                    </div>
+
+                    <!-- Rainy Window Canvas Container -->
+                    <div class="relative w-full h-64 rounded-2xl overflow-hidden border-2 border-pinkgoth-border/80 shadow-inner group">
+                        <div class="absolute inset-0 bg-cover bg-center transition-all duration-700 filter blur-[1px]" style="background-image: linear-gradient(to bottom, rgba(18, 13, 24, 0.6), rgba(74, 43, 99, 0.8)), url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop');">
+                            <div class="absolute top-4 right-6 w-12 h-12 rounded-full bg-pinkgoth-light/80 shadow-[0_0_20px_#ff69b4] flex items-center justify-center">
+                                <i class="fa-solid fa-moon text-goth-base text-2xl"></i>
+                            </div>
+                        </div>
+                        <canvas id="window-canvas" class="absolute inset-0 w-full h-full z-10"></canvas>
+                        <div class="absolute bottom-2 left-2 z-20 text-[10px] text-pink-200/60 font-cute pointer-events-none bg-goth-base/80 px-2 py-0.5 rounded">
+                            Wipe window to reveal night view
+                        </div>
+                    </div>
+
+                    <!-- Candle Controls -->
+                    <div class="bg-goth-dark/60 rounded-2xl p-3 border border-pinkgoth-border/40 space-y-2">
+                        <div class="flex items-center justify-between text-xs font-cute text-pinkgoth-light">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-fire-flame-curved text-amber-400 animate-pulse"></i> Sanctuary Candles</span>
+                            <button onclick="toggleCandles()" id="candle-toggle-btn" class="text-pinkgoth-bright hover:underline text-xs">Extinguish</button>
+                        </div>
+                        <div class="flex justify-around items-center pt-1" id="candle-display">
+                            <div class="candle flex flex-col items-center">
+                                <div class="candle-flame w-2 h-4 bg-amber-300 rounded-full animate-glow-pulse shadow-[0_0_10px_#f59e0b]"></div>
+                                <div class="w-3 h-8 bg-pinkgoth-deep border border-pinkgoth-accent rounded-t-sm"></div>
+                            </div>
+                            <div class="candle flex flex-col items-center">
+                                <div class="candle-flame w-2.5 h-5 bg-amber-300 rounded-full animate-glow-pulse shadow-[0_0_12px_#f59e0b]"></div>
+                                <div class="w-4 h-12 bg-purple-950 border border-pinkgoth-accent rounded-t-sm"></div>
+                            </div>
+                            <div class="candle flex flex-col items-center">
+                                <div class="candle-flame w-2 h-4 bg-amber-300 rounded-full animate-glow-pulse shadow-[0_0_10px_#f59e0b]"></div>
+                                <div class="w-3 h-9 bg-pinkgoth-deep border border-pinkgoth-accent rounded-t-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Column: Room Avatar & Affirmation -->
+                <div class="goth-glass rounded-3xl p-6 flex flex-col items-center justify-between text-center relative border border-pinkgoth-accent/40 shadow-2xl">
+                    <div class="space-y-1">
+                        <span class="text-xs font-cute uppercase tracking-widest text-pinkgoth-accent">Welcome Home, Magickal Soul</span>
+                        <h2 id="room-greeting" class="font-cinzel text-2xl font-bold text-pinkgoth-light drop-shadow-[0_0_8px_rgba(255,105,180,0.5)]">Your Pink Goth Haven</h2>
+                    </div>
+
+                    <!-- Room Mini Display / Doll Showcase -->
+                    <div class="relative my-4 group cursor-pointer" onclick="switchTab('avatar')" title="Click to customize your Witchy Avatar!">
+                        <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-gradient-to-b from-purple-950/80 to-pinkgoth-deep/40 border-2 border-pinkgoth-accent flex items-center justify-center p-2 shadow-[0_0_25px_rgba(255,105,180,0.3)] relative overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                            <div id="room-avatar-preview" class="w-full h-full flex items-center justify-center"></div>
+                            <div class="absolute inset-0 bg-pinkgoth-deep/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-goth-base/90 text-pinkgoth-bright font-cute text-xs px-3 py-1.5 rounded-full border border-pinkgoth-accent shadow-lg">Dress Up <i class="fa-solid fa-wand-magic"></i></span>
+                            </div>
+                        </div>
+                        <!-- Familiar Cat Companion on side -->
+                        <div id="room-familiar-preview" class="absolute bottom-0 right-0 w-14 h-14 bg-goth-dark border border-pinkgoth-accent rounded-full p-1.5 shadow-lg animate-float"></div>
+                    </div>
+
+                    <!-- Daily Affirmation Spell Card -->
+                    <div class="w-full bg-goth-dark/80 border border-pinkgoth-border/80 rounded-2xl p-4 text-left relative">
+                        <div class="flex items-center justify-between text-pinkgoth-accent text-xs font-cute mb-2">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-sparkles"></i> Daily Affirmation Spell</span>
+                            <button onclick="refreshAffirmation()" class="hover:text-pinkgoth-bright transition-colors" title="Get New Spell"><i class="fa-solid fa-rotate-right"></i></button>
+                        </div>
+                        <p id="affirmation-text" class="text-sm font-cute text-pinkgoth-pastel italic leading-relaxed">
+                            "You are deserving of peace, gentle magic, and a soft place to land today."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="goth-glass rounded-3xl p-5 flex flex-col justify-between space-y-4 border border-pinkgoth-accent/30">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-cinzel text-lg text-pinkgoth-light font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-pinkgoth-accent"></i> Ambient Sound Mixer
+                        </h2>
+                        <span class="text-xs text-pink-300/60 font-cute">Web Audio Synth</span>
+                    </div>
+
+                    <p class="text-xs font-cute text-pinkgoth-light/70">Mix ambient background audio tones to create your relaxing vibe:</p>
+
+                    <div class="space-y-3 flex-1 justify-center flex flex-col">
+                        <!-- Rain Sound -->
+                        <div class="bg-goth-dark/60 p-2.5 rounded-xl border border-pinkgoth-border/40 flex items-center justify-between gap-3">
+                            <button onclick="toggleSound('rain')" id="btn-sound-rain" class="w-9 h-9 rounded-lg bg-goth-card border border-pinkgoth-border flex items-center justify-center text-pink-300 hover:text-pinkgoth-bright transition-all">
+                                <i class="fa-solid fa-cloud-rain"></i>
+                            </button>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-xs font-cute mb-1">
+                                    <span class="text-pinkgoth-light">Gentle Rain</span>
+                                    <span id="val-rain" class="text-pinkgoth-accent">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" oninput="setSoundVolume('rain', this.value)" class="w-full accent-pink-500 h-1.5 bg-goth-base rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+
+                        <!-- Fireplace Sound -->
+                        <div class="bg-goth-dark/60 p-2.5 rounded-xl border border-pinkgoth-border/40 flex items-center justify-between gap-3">
+                            <button onclick="toggleSound('fire')" id="btn-sound-fire" class="w-9 h-9 rounded-lg bg-goth-card border border-pinkgoth-border flex items-center justify-center text-amber-400 hover:text-amber-300 transition-all">
+                                <i class="fa-solid fa-fire"></i>
+                            </button>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-xs font-cute mb-1">
+                                    <span class="text-pinkgoth-light">Crackling Hearth</span>
+                                    <span id="val-fire" class="text-pinkgoth-accent">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" oninput="setSoundVolume('fire', this.value)" class="w-full accent-pink-500 h-1.5 bg-goth-base rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+
+                        <!-- Magic Chimes Sound -->
+                        <div class="bg-goth-dark/60 p-2.5 rounded-xl border border-pinkgoth-border/40 flex items-center justify-between gap-3">
+                            <button onclick="toggleSound('chimes')" id="btn-sound-chimes" class="w-9 h-9 rounded-lg bg-goth-card border border-pinkgoth-border flex items-center justify-center text-purple-300 hover:text-purple-200 transition-all">
+                                <i class="fa-solid fa-bell font-xs"></i>
+                            </button>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-xs font-cute mb-1">
+                                    <span class="text-pinkgoth-light">Magical Tone</span>
+                                    <span id="val-chimes" class="text-pinkgoth-accent">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" oninput="setSoundVolume('chimes', this.value)" class="w-full accent-pink-500 h-1.5 bg-goth-base rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+
+                        <!-- Cat Purr Sound -->
+                        <div class="bg-goth-dark/60 p-2.5 rounded-xl border border-pinkgoth-border/40 flex items-center justify-between gap-3">
+                            <button onclick="toggleSound('purr')" id="btn-sound-purr" class="w-9 h-9 rounded-lg bg-goth-card border border-pinkgoth-border flex items-center justify-center text-pink-400 hover:text-pink-300 transition-all">
+                                <i class="fa-solid fa-cat"></i>
+                            </button>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-xs font-cute mb-1">
+                                    <span class="text-pinkgoth-light">Cat Purr & Breeze</span>
+                                    <span id="val-purr" class="text-pinkgoth-accent">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" oninput="setSoundVolume('purr', this.value)" class="w-full accent-pink-500 h-1.5 bg-goth-base rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button onclick="presetCozyMode()" class="goth-btn text-xs font-cute px-4 py-2 rounded-xl bg-pinkgoth-deep/50 hover:bg-pinkgoth-deep border border-pinkgoth-accent/60 text-pinkgoth-light w-full">
+                            ✨ Activate Instant Cozy Preset
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 2: AVATAR / DOLL DRESS-UP ================= -->
+        <section id="sec-avatar" class="tab-content hidden">
+            <div class="goth-glass rounded-3xl p-6 border border-pinkgoth-accent/40 max-w-5xl mx-auto shadow-2xl">
+                <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                    
+                    <div class="w-full md:w-1/2 flex flex-col items-center justify-center space-y-4">
+                        <div class="text-center">
+                            <h2 class="font-cinzel text-xl font-bold text-pinkgoth-light">Pink Goth Doll Maker</h2>
+                            <p class="text-xs text-pink-300/70 font-cute">Customize your witch doll outfit and style</p>
+                        </div>
+
+                        <div class="relative w-64 h-80 bg-gradient-to-b from-goth-dark to-purple-950/70 rounded-3xl border-2 border-pinkgoth-accent/60 p-4 flex items-center justify-center shadow-[0_0_30px_rgba(255,105,180,0.25)] overflow-hidden">
+                            <div id="full-avatar-display" class="w-full h-full flex items-center justify-center"></div>
+                        </div>
+
+                        <button onclick="randomizeAvatar()" class="goth-btn bg-goth-card hover:bg-pinkgoth-deep border border-pinkgoth-accent/60 px-5 py-2 rounded-full text-xs font-cute text-pinkgoth-light flex items-center gap-2">
+                            <i class="fa-solid fa-dice-d20 text-pinkgoth-bright"></i> Randomize Doll Style
+                        </button>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="w-full md:w-1/2 space-y-5 bg-goth-dark/60 p-5 rounded-2xl border border-pinkgoth-border/50">
+                        <div class="space-y-2">
+                            <label class="text-xs font-cute text-pinkgoth-accent flex items-center justify-between">
+                                <span><i class="fa-solid fa-scissors mr-1"></i> Hair Style</span>
+                                <span id="lbl-hair" class="text-pink-300/70">Witchy Buns</span>
+                            </label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button onclick="setAvatarParam('hair', 'buns')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Buns</button>
+                                <button onclick="setAvatarParam('hair', 'long')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Long Wave</button>
+                                <button onclick="setAvatarParam('hair', 'bob')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Goth Bob</button>
+                                <button onclick="setAvatarParam('hair', 'braids')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Twin Braids</button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-cute text-pinkgoth-accent flex items-center justify-between">
+                                <span><i class="fa-solid fa-shirt mr-1"></i> Gothic Outfit</span>
+                                <span id="lbl-outfit" class="text-pink-300/70">Velvet Dress</span>
+                            </label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setAvatarParam('outfit', 'dress')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Velvet Dress</button>
+                                <button onclick="setAvatarParam('outfit', 'corset')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Lace Corset</button>
+                                <button onclick="setAvatarParam('outfit', 'robe')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Starry Robe</button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-cute text-pinkgoth-accent flex items-center justify-between">
+                                <span><i class="fa-solid fa-hat-wizard mr-1"></i> Hat / Headwear</span>
+                                <span id="lbl-hat" class="text-pink-300/70">Classic Pointy</span>
+                            </label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setAvatarParam('hat', 'pointy')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Pointy Hat</button>
+                                <button onclick="setAvatarParam('hat', 'bow')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Goth Bow</button>
+                                <button onclick="setAvatarParam('hat', 'horns')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Bat Wings</button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-cute text-pinkgoth-accent flex items-center justify-between">
+                                <span><i class="fa-solid fa-cat mr-1"></i> Familiar Companion</span>
+                                <span id="lbl-familiar" class="text-pink-300/70">Black Kitty</span>
+                            </label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setAvatarParam('familiar', 'cat')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Black Kitty</button>
+                                <button onclick="setAvatarParam('familiar', 'bat')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Pink Bat</button>
+                                <button onclick="setAvatarParam('familiar', 'frog')" class="bg-goth-card hover:border-pinkgoth-bright border border-pinkgoth-border p-2 rounded-xl text-xs font-cute">Crystal Toad</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 3: POTION & BREW MAKER ================= -->
+        <section id="sec-cauldron" class="tab-content hidden">
+            <div class="goth-glass rounded-3xl p-6 border border-pinkgoth-accent/40 max-w-5xl mx-auto shadow-2xl">
+                <div class="text-center mb-6">
+                    <h2 class="font-cinzel text-2xl font-bold text-pinkgoth-light">Pink Cauldron Brew Station</h2>
+                    <p class="text-xs text-pink-300/70 font-cute">Mix magical ingredients to brew a cozy potion spell</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    
+                    <div class="flex flex-col items-center justify-center space-y-4">
+                        <div class="relative w-64 h-64 bg-goth-dark/80 rounded-3xl border border-pinkgoth-border/80 flex items-center justify-center p-4 overflow-hidden">
+                            <div id="cauldron-bubbles" class="absolute inset-0 pointer-events-none"></div>
+
+                            <div class="relative z-10 flex flex-col items-center">
+                                <div id="potion-steam" class="flex gap-2 mb-1">
+                                    <span class="w-3 h-3 rounded-full bg-pink-400/40 animate-steam"></span>
+                                    <span class="w-4 h-4 rounded-full bg-purple-400/40 animate-steam" style="animation-delay: 0.5s;"></span>
+                                    <span class="w-3 h-3 rounded-full bg-
